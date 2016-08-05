@@ -5,7 +5,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.stephenbain.obliquestrategies.MyApplication;
 import com.stephenbain.obliquestrategies.R;
 
@@ -25,6 +27,7 @@ public class HomeActivity extends AppCompatActivity implements HomePresenter.Hom
         MyApplication.getComponent().inject(this);
 
         setContentView(R.layout.activity_home);
+        ButterKnife.bind(this);
 
         presenter.attach(this);
         presenter.present();
@@ -35,5 +38,25 @@ public class HomeActivity extends AppCompatActivity implements HomePresenter.Hom
         super.onDestroy();
 
         presenter.detach();
+    }
+
+    @Override
+    public void setClickListener(final HomePresenter.ClickListener clickListener) {
+        touchIntercept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clickListener.onClicked();
+            }
+        });
+    }
+
+    @Override
+    public void showStrategy(String strategy) {
+        this.strategy.setText(strategy);
+    }
+
+    @Override
+    public void showError() {
+        Toast.makeText(this, "error", Toast.LENGTH_SHORT).show();
     }
 }
