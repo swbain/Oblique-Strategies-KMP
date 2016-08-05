@@ -30,4 +30,8 @@ public class HomePresenter {
     interface HomeView {
 
     }
+
+    interface ClickListener {
+
+    }
 }
