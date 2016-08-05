@@ -5,7 +5,6 @@ import com.stephenbain.obliquestrategies.model.StrategyDao;
 import com.stephenbain.obliquestrategies.util.NullObject;
 
 import javax.inject.Inject;
-import java.util.UUID;
 
 public class HomePresenter {
 
