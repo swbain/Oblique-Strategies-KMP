@@ -1,9 +1,11 @@
 package com.stephenbain.obliquestrategies.view
 
-import java.util.*
+import com.stephenbain.obliquestrategies.data.StrategyService
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class HomePresenter @Inject constructor() {
+class HomePresenter @Inject constructor(val strategyService: StrategyService) {
 
     private var view: HomeView? = null
 
@@ -16,10 +18,16 @@ class HomePresenter @Inject constructor() {
     }
 
     fun present() {
-        view?.setStrategy("hello world from presenter. lol")
+        refreshStrategy()
         view?.setClickListener {
-            view?.setStrategy(UUID.randomUUID().toString())
+            refreshStrategy()
         }
+    }
+
+    fun refreshStrategy() {
+        strategyService.requestStrategy()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io()).subscribe({ cardResponse -> view?.setStrategy(cardResponse.strategy) })
     }
 
     interface HomeView {
