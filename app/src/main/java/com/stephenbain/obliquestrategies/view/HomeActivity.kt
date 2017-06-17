@@ -26,4 +26,8 @@ class HomeActivity : AppCompatActivity(), HomePresenter.HomeView {
         this.strategy.text = strategy
     }
 
+    override fun setClickListener(clickListener: () -> Unit) {
+        touchIntercept.setOnClickListener { clickListener.invoke() }
+    }
+
 }
