@@ -2,31 +2,27 @@ package com.stephenbain.obliquestrategies.view
 
 class HomePresenter {
 
-    private val nullView = NullHomeView()
-
-    private var view: HomeView = nullView
+    private var view: HomeView? = null
 
     fun attach(view: HomeView) {
         this.view = view
     }
 
     fun detach() {
-        view = nullView
+        view = null
     }
 
     fun present() {
-        view.setStrategy("hello world from presenter. lol")
+        view?.setStrategy("hello world from presenter. lol")
     }
 
     interface HomeView {
         fun setStrategy(strategy: String)
+        fun setClickListener(clickListener: ClickListener)
     }
 
-    private class NullHomeView : HomeView {
-        override fun setStrategy(strategy: String) {
-            // no-op
-        }
-
+    interface ClickListener {
+        fun onClicked()
     }
 
 }
