@@ -1,5 +1,7 @@
 package com.stephenbain.obliquestrategies.view
 
+import java.util.*
+
 class HomePresenter {
 
     private var view: HomeView? = null
@@ -14,15 +16,14 @@ class HomePresenter {
 
     fun present() {
         view?.setStrategy("hello world from presenter. lol")
+        view?.setClickListener {
+            view?.setStrategy(UUID.randomUUID().toString())
+        }
     }
 
     interface HomeView {
         fun setStrategy(strategy: String)
-        fun setClickListener(clickListener: ClickListener)
-    }
-
-    interface ClickListener {
-        fun onClicked()
+        fun setClickListener(clickListener: () -> Unit)
     }
 
 }
