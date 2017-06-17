@@ -1,8 +1,9 @@
 package com.stephenbain.obliquestrategies.view
 
 import java.util.*
+import javax.inject.Inject
 
-class HomePresenter {
+class HomePresenter @Inject constructor() {
 
     private var view: HomeView? = null
 
