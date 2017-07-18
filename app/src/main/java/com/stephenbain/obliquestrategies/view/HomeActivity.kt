@@ -29,7 +29,7 @@ class HomeActivity : AppCompatActivity(), HomePresenter.HomeView {
     }
 
     override fun setClickListener(clickListener: () -> Unit) {
-        touchIntercept.setOnClickListener { clickListener.invoke() }
+        touchIntercept.setOnClickListener { clickListener() }
     }
 
 }
