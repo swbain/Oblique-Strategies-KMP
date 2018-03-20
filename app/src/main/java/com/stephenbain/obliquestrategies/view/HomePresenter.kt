@@ -5,7 +5,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class HomePresenter @Inject constructor(val strategyService: StrategyService) {
+class HomePresenter @Inject constructor(private val strategyService: StrategyService) {
 
     private var view: HomeView? = null
 
@@ -19,15 +19,14 @@ class HomePresenter @Inject constructor(val strategyService: StrategyService) {
 
     fun present() {
         refreshStrategy()
-        view?.setClickListener {
-            refreshStrategy()
-        }
+        view?.setClickListener(::refreshStrategy)
     }
 
-    fun refreshStrategy() {
+    private fun refreshStrategy() {
         strategyService.requestStrategy()
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io()).subscribe({ cardResponse -> view?.setStrategy(cardResponse.strategy) })
+                .subscribeOn(Schedulers.io())
+                .subscribe({ cardResponse -> view?.setStrategy(cardResponse.strategy) })
     }
 
     interface HomeView {
