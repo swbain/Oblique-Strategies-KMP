@@ -1,7 +1,7 @@
 package com.stephenbain.obliquestrategies.view
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.stephenbain.obliquestrategies.MyApplication
 import com.stephenbain.obliquestrategies.R
 import kotlinx.android.synthetic.main.activity_home.*
