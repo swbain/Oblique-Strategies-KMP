@@ -13,8 +13,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Preview
 fun App() {
     MaterialTheme {
-        Box(modifier = Modifier.fillMaxSize()) {
-            Text(text = "hello world", modifier = Modifier.align(Alignment.Center))
-        }
+        MainScreen()
     }
 }
